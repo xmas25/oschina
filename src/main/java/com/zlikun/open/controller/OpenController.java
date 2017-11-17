@@ -1,6 +1,7 @@
 package com.zlikun.open.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zlikun.open.configure.AppProperties;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.FormBody;
@@ -26,12 +27,9 @@ public class OpenController {
     @Autowired
     ObjectMapper objectMapper ;
 
-    @Value("${oschina.client_id}")
-    String clientId ;
-    @Value("${oschina.client_secret}")
-    String clientSecret ;
-    @Value("${oschina.redirect_uri}")
-    String redirectUri ;
+    @Autowired
+    AppProperties properties ;
+
     @Value("${http.header.user_agent}")
     String userAgent ;
 
@@ -157,9 +155,9 @@ public class OpenController {
 
         // 构造请求参数
         FormBody body = new FormBody.Builder()
-                .add("redirect_uri" ,redirectUri)
-                .add("client_id" ,clientId)
-                .add("client_secret" ,clientSecret)
+                .add("redirect_uri" ,properties.getRedirectUri())
+                .add("client_id" ,properties.getClientId())
+                .add("client_secret" ,properties.getClientSecret())
                 .add("grant_type" ,"authorization_code")
                 .add("dataType" ,"json")
                 .add("code" ,code)

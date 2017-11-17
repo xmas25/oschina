@@ -7,11 +7,12 @@ import org.springframework.context.annotation.PropertySources;
 
 @SpringBootApplication
 @PropertySources({
-		@PropertySource("file:///data/oschina.net/config.properties")
+		@PropertySource("http://conf.zlikun.com/oschina.net.properties")
 })
 public class OschinaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OschinaApplication.class, args);
 	}
+
 }
